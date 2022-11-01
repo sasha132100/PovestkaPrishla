@@ -1,0 +1,517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище YouthLeisureModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Group_">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name_" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Specialization" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupsToSections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="GroupNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kid">
+          <Key>
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="SchoolNumber" Type="nvarchar" MaxLength="40" />
+          <Property Name="Class" Type="nvarchar" MaxLength="4" />
+          <Property Name="BirthCertificate" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address_" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="HomeNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ParentsInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CurrentGroup" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartDateOfTheVisit" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KidToNewGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KidFullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CurrentGroup" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="FutureGroup" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartDateOfTheVisit" Type="datetime" Nullable="false" />
+          <Property Name="EndDateOfTheVisit" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name_" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Pasport" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Education" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="Address_" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="HomeNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Specialization_s" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeachersToGroups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeacherFN" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="GroupNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__GroupsToS__Group__66603565">
+          <End Role="Group_" Type="Self.Group_" Multiplicity="1" />
+          <End Role="GroupsToSections" Type="Self.GroupsToSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="GroupsToSections">
+              <PropertyRef Name="GroupNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupsToS__Secti__656C112C">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="GroupsToSections" Type="Self.GroupsToSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="GroupsToSections">
+              <PropertyRef Name="SectionNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kid__CurrentGrou__5EBF139D">
+          <End Role="Group_" Type="Self.Group_" Multiplicity="1" />
+          <End Role="Kid" Type="Self.Kid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="Kid">
+              <PropertyRef Name="CurrentGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KidToNewG__KidFu__6D0D32F4">
+          <End Role="Kid" Type="Self.Kid" Multiplicity="1" />
+          <End Role="KidToNewGroup" Type="Self.KidToNewGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kid">
+              <PropertyRef Name="FullName" />
+            </Principal>
+            <Dependent Role="KidToNewGroup">
+              <PropertyRef Name="KidFullName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeachersT__Group__6A30C649">
+          <End Role="Group_" Type="Self.Group_" Multiplicity="1" />
+          <End Role="TeachersToGroups" Type="Self.TeachersToGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="TeachersToGroups">
+              <PropertyRef Name="GroupNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeachersT__Teach__693CA210">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="TeachersToGroups" Type="Self.TeachersToGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="FullName" />
+            </Principal>
+            <Dependent Role="TeachersToGroups">
+              <PropertyRef Name="TeacherFN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище YouthLeisureModelContainer">
+          <EntitySet Name="Group_" EntityType="Self.Group_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupsToSections" EntityType="Self.GroupsToSections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kid" EntityType="Self.Kid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KidToNewGroup" EntityType="Self.KidToNewGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeachersToGroups" EntityType="Self.TeachersToGroups" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__GroupsToS__Group__66603565" Association="Self.FK__GroupsToS__Group__66603565">
+            <End Role="Group_" EntitySet="Group_" />
+            <End Role="GroupsToSections" EntitySet="GroupsToSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupsToS__Secti__656C112C" Association="Self.FK__GroupsToS__Secti__656C112C">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="GroupsToSections" EntitySet="GroupsToSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kid__CurrentGrou__5EBF139D" Association="Self.FK__Kid__CurrentGrou__5EBF139D">
+            <End Role="Group_" EntitySet="Group_" />
+            <End Role="Kid" EntitySet="Kid" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KidToNewG__KidFu__6D0D32F4" Association="Self.FK__KidToNewG__KidFu__6D0D32F4">
+            <End Role="Kid" EntitySet="Kid" />
+            <End Role="KidToNewGroup" EntitySet="KidToNewGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeachersT__Group__6A30C649" Association="Self.FK__TeachersT__Group__6A30C649">
+            <End Role="Group_" EntitySet="Group_" />
+            <End Role="TeachersToGroups" EntitySet="TeachersToGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeachersT__Teach__693CA210" Association="Self.FK__TeachersT__Teach__693CA210">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="TeachersToGroups" EntitySet="TeachersToGroups" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YouthLeisureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Group_">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupsToSections" Relationship="Self.FK__GroupsToS__Group__66603565" FromRole="Group_" ToRole="GroupsToSections" />
+          <NavigationProperty Name="Kid" Relationship="Self.FK__Kid__CurrentGrou__5EBF139D" FromRole="Group_" ToRole="Kid" />
+          <NavigationProperty Name="TeachersToGroups" Relationship="Self.FK__TeachersT__Group__6A30C649" FromRole="Group_" ToRole="TeachersToGroups" />
+        </EntityType>
+        <EntityType Name="GroupsToSections">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group_" Relationship="Self.FK__GroupsToS__Group__66603565" FromRole="GroupsToSections" ToRole="Group_" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__GroupsToS__Secti__656C112C" FromRole="GroupsToSections" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Kid">
+          <Key>
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="SchoolNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="BirthCertificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HomeNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentsInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentGroup" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDateOfTheVisit" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Group_" Relationship="Self.FK__Kid__CurrentGrou__5EBF139D" FromRole="Kid" ToRole="Group_" />
+          <NavigationProperty Name="KidToNewGroup" Relationship="Self.FK__KidToNewG__KidFu__6D0D32F4" FromRole="Kid" ToRole="KidToNewGroup" />
+        </EntityType>
+        <EntityType Name="KidToNewGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KidFullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentGroup" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FutureGroup" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDateOfTheVisit" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateOfTheVisit" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Kid" Relationship="Self.FK__KidToNewG__KidFu__6D0D32F4" FromRole="KidToNewGroup" ToRole="Kid" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupsToSections" Relationship="Self.FK__GroupsToS__Secti__656C112C" FromRole="Section" ToRole="GroupsToSections" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Education" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HomeNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Specialization_s" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TeachersToGroups" Relationship="Self.FK__TeachersT__Teach__693CA210" FromRole="Teacher" ToRole="TeachersToGroups" />
+        </EntityType>
+        <EntityType Name="TeachersToGroups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherFN" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group_" Relationship="Self.FK__TeachersT__Group__6A30C649" FromRole="TeachersToGroups" ToRole="Group_" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__TeachersT__Teach__693CA210" FromRole="TeachersToGroups" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK__GroupsToS__Group__66603565">
+          <End Role="Group_" Type="Self.Group_" Multiplicity="1" />
+          <End Role="GroupsToSections" Type="Self.GroupsToSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="GroupsToSections">
+              <PropertyRef Name="GroupNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kid__CurrentGrou__5EBF139D">
+          <End Role="Group_" Type="Self.Group_" Multiplicity="1" />
+          <End Role="Kid" Type="Self.Kid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="Kid">
+              <PropertyRef Name="CurrentGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeachersT__Group__6A30C649">
+          <End Role="Group_" Type="Self.Group_" Multiplicity="1" />
+          <End Role="TeachersToGroups" Type="Self.TeachersToGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="TeachersToGroups">
+              <PropertyRef Name="GroupNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupsToS__Secti__656C112C">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="GroupsToSections" Type="Self.GroupsToSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="GroupsToSections">
+              <PropertyRef Name="SectionNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KidToNewG__KidFu__6D0D32F4">
+          <End Role="Kid" Type="Self.Kid" Multiplicity="1" />
+          <End Role="KidToNewGroup" Type="Self.KidToNewGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kid">
+              <PropertyRef Name="FullName" />
+            </Principal>
+            <Dependent Role="KidToNewGroup">
+              <PropertyRef Name="KidFullName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeachersT__Teach__693CA210">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="TeachersToGroups" Type="Self.TeachersToGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="FullName" />
+            </Principal>
+            <Dependent Role="TeachersToGroups">
+              <PropertyRef Name="TeacherFN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YouthLeisureEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Group_" EntityType="Self.Group_" />
+          <EntitySet Name="GroupsToSections" EntityType="Self.GroupsToSections" />
+          <EntitySet Name="Kid" EntityType="Self.Kid" />
+          <EntitySet Name="KidToNewGroup" EntityType="Self.KidToNewGroup" />
+          <EntitySet Name="Section" EntityType="Self.Section" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="TeachersToGroups" EntityType="Self.TeachersToGroups" />
+          <AssociationSet Name="FK__GroupsToS__Group__66603565" Association="Self.FK__GroupsToS__Group__66603565">
+            <End Role="Group_" EntitySet="Group_" />
+            <End Role="GroupsToSections" EntitySet="GroupsToSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kid__CurrentGrou__5EBF139D" Association="Self.FK__Kid__CurrentGrou__5EBF139D">
+            <End Role="Group_" EntitySet="Group_" />
+            <End Role="Kid" EntitySet="Kid" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeachersT__Group__6A30C649" Association="Self.FK__TeachersT__Group__6A30C649">
+            <End Role="Group_" EntitySet="Group_" />
+            <End Role="TeachersToGroups" EntitySet="TeachersToGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupsToS__Secti__656C112C" Association="Self.FK__GroupsToS__Secti__656C112C">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="GroupsToSections" EntitySet="GroupsToSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KidToNewG__KidFu__6D0D32F4" Association="Self.FK__KidToNewG__KidFu__6D0D32F4">
+            <End Role="Kid" EntitySet="Kid" />
+            <End Role="KidToNewGroup" EntitySet="KidToNewGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeachersT__Teach__693CA210" Association="Self.FK__TeachersT__Teach__693CA210">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="TeachersToGroups" EntitySet="TeachersToGroups" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище YouthLeisureModelContainer" CdmEntityContainer="YouthLeisureEntities">
+          <EntitySetMapping Name="Group_">
+            <EntityTypeMapping TypeName="YouthLeisureModel.Group_">
+              <MappingFragment StoreEntitySet="Group_">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name_" ColumnName="Name_" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupsToSections">
+            <EntityTypeMapping TypeName="YouthLeisureModel.GroupsToSections">
+              <MappingFragment StoreEntitySet="GroupsToSections">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SectionNumber" ColumnName="SectionNumber" />
+                <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kid">
+            <EntityTypeMapping TypeName="YouthLeisureModel.Kid">
+              <MappingFragment StoreEntitySet="Kid">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="SchoolNumber" ColumnName="SchoolNumber" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="BirthCertificate" ColumnName="BirthCertificate" />
+                <ScalarProperty Name="Address_" ColumnName="Address_" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="ParentsInfo" ColumnName="ParentsInfo" />
+                <ScalarProperty Name="CurrentGroup" ColumnName="CurrentGroup" />
+                <ScalarProperty Name="StartDateOfTheVisit" ColumnName="StartDateOfTheVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KidToNewGroup">
+            <EntityTypeMapping TypeName="YouthLeisureModel.KidToNewGroup">
+              <MappingFragment StoreEntitySet="KidToNewGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KidFullName" ColumnName="KidFullName" />
+                <ScalarProperty Name="CurrentGroup" ColumnName="CurrentGroup" />
+                <ScalarProperty Name="FutureGroup" ColumnName="FutureGroup" />
+                <ScalarProperty Name="StartDateOfTheVisit" ColumnName="StartDateOfTheVisit" />
+                <ScalarProperty Name="EndDateOfTheVisit" ColumnName="EndDateOfTheVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section">
+            <EntityTypeMapping TypeName="YouthLeisureModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Name_" ColumnName="Name_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="YouthLeisureModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="YouthLeisureModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Pasport" ColumnName="Pasport" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="Address_" ColumnName="Address_" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="Specialization_s" ColumnName="Specialization_s" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeachersToGroups">
+            <EntityTypeMapping TypeName="YouthLeisureModel.TeachersToGroups">
+              <MappingFragment StoreEntitySet="TeachersToGroups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TeacherFN" ColumnName="TeacherFN" />
+                <ScalarProperty Name="GroupNumber" ColumnName="GroupNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

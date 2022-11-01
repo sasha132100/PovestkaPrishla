@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="23c2d02b46334f5ab8af26e7b855b01e" Name="Diagram1">
+        <EntityTypeShape EntityType="YouthLeisureModel.Group_" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.GroupsToSections" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.Kid" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.KidToNewGroup" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.Section" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.Teacher" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YouthLeisureModel.TeachersToGroups" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="YouthLeisureModel.FK__GroupsToS__Group__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="YouthLeisureModel.FK__Kid__CurrentGrou__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="YouthLeisureModel.FK__TeachersT__Group__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="YouthLeisureModel.FK__GroupsToS__Secti__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="YouthLeisureModel.FK__KidToNewG__KidFu__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="YouthLeisureModel.FK__TeachersT__Teach__693CA210" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

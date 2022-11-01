@@ -23,6 +23,28 @@ namespace Povestka_
         public MainWindow()
         {
             InitializeComponent();
+            txtLogin.Text = "Admin";
+            txtPassword.Password = "qqqqwwww";
+        }
+
+        private void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtLogin.Text == "Admin" && txtPassword.Password == "qqqqwwww")
+            {
+                WindowAdmin windowAdmin = new WindowAdmin();
+                this.Close();
+                windowAdmin.ShowDialog();
+            }
+            else if (txtLogin.Text == "Viewer" && txtPassword.Password == "qqqqwwww")
+            {
+                WindowViewKids windowViewKids = new WindowViewKids();
+                this.Close();
+                windowViewKids.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Неверно введены данные", "Результат", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
