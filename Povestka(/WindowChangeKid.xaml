@@ -1,0 +1,58 @@
+﻿<Window x:Class="Povestka_.WindowChangeKid"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Povestka_"
+        mc:Ignorable="d"
+        Title="WindowChangeKid" Height="470" Width="800" MinHeight="470" MinWidth="800">
+    <StackPanel Background="AliceBlue">
+        <Grid>
+            <TextBlock Text="Измените имеющиеся данные для внесения изменений в базе данных системы." FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 5, 0, 0"/>
+        </Grid>
+        <Grid Name="FullNameGrid" Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="FullNameText" Text="Введите ФИО:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="FullNameBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="AgeText" Text="Возраст:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="AgeBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="NumberOfSchoolText" Text="Номер школы:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="NumberOfSchoolBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="ClassText" Text="Класс:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="ClassBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="BirthCertificateText" Text="Свидетельство о рождении:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="BirthCertificateBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="AddressText" Text="Адрес проживания:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="AddressBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="HomeNumberText" Text="Домашний телефон:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="HomeNumberBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="ParentsInfoText" Text="Информация о родителях:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="ParentsInfoBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="CurrentGroupText" Text="Текущая группа:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="CurrentGroupBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <TextBlock Name="StartDateText" Text="Дата начала обучения в текущей группе:" HorizontalAlignment="Left" FontSize="15" FontWeight="Bold" Foreground="Black" FontFamily="Roboto" VerticalAlignment="Center" Margin="5, 0, 0, 0"/>
+            <TextBox Name="StartDateBox" HorizontalAlignment="Left" Margin="330, 0, 0, 0" Width="200" Height="20"/>
+        </Grid>
+        <Grid Width="Auto" Height="Auto" Margin="0, 15, 0, 0">
+            <Button Content="Назад" FontFamily="Roboto" FontSize="15" Width="120" Height="30" HorizontalAlignment="Right" Margin="0,0,140,0" Background="White" Click="BackToKidWindow_Button"/>
+            <Button Content="Сохранить" FontFamily="Roboto" FontSize="15" Width="120" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0" Background="White" Click="SaveChanges_Button"/>
+        </Grid>
+    </StackPanel>
+</Window>

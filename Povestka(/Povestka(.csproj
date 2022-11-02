@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -110,6 +113,9 @@
     <Compile Include="WindowAdmin.xaml.cs">
       <DependentUpon>WindowAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowChangeKid.xaml.cs">
+      <DependentUpon>WindowChangeKid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowViewKids.xaml.cs">
       <DependentUpon>WindowViewKids.xaml</DependentUpon>
     </Compile>
@@ -130,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowChangeKid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

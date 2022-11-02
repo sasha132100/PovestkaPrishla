@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Microsoft.Win32;
+using Word = Microsoft.Office.Interop.Word;
+
 
 namespace Povestka_
 {
@@ -80,7 +84,9 @@ namespace Povestka_
 
         private void AddNewTeacher_Button(object sender, MouseButtonEventArgs e)
         {
-
+            WindowAddNewTeacher windowAddNewTeacher = new WindowAddNewTeacher();
+            this.Close();
+            windowAddNewTeacher.ShowDialog();
         }
 
         private void BackToMainWindow_Button(object sender, MouseButtonEventArgs e)
@@ -116,7 +122,78 @@ namespace Povestka_
 
         private void PDFOut_Button(object sender, EventArgs eventArgs)
         {
+            List<Teacher> allTeachers;
+            using (YouthLeisureEntities db = new YouthLeisureEntities())
+            {
+                allTeachers = db.Teacher.ToList();
+            }
 
+            var app = new Word.Application();
+            Word.Document document = app.Documents.Add();
+
+            Word.Paragraph tableParagraph = document.Paragraphs.Add();
+            Word.Range tableRange = tableParagraph.Range;
+            Word.Table employeeTable = document.Tables.Add(tableRange, allTeachers.Count() + 1, 9);
+            employeeTable.Borders.InsideLineStyle = employeeTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+            employeeTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+            Word.Range cellRange;
+            cellRange = employeeTable.Cell(1, 1).Range;
+            cellRange.Text = "ФИО";
+            cellRange = employeeTable.Cell(1, 2).Range;
+            cellRange.Text = "Паспортные данные";
+            cellRange = employeeTable.Cell(1, 3).Range;
+            cellRange.Text = "Дата рождения";
+            cellRange = employeeTable.Cell(1, 4).Range;
+            cellRange.Text = "Пол";
+            cellRange = employeeTable.Cell(1, 5).Range;
+            cellRange.Text = "Семейное положение";
+            cellRange = employeeTable.Cell(1, 6).Range;
+            cellRange.Text = "Образование";
+            cellRange = employeeTable.Cell(1, 7).Range;
+            cellRange.Text = "Адрес проживания";
+            cellRange = employeeTable.Cell(1, 8).Range;
+            cellRange.Text = "Домашний телефон";
+            cellRange = employeeTable.Cell(1, 9).Range;
+            cellRange.Text = "Специализация(и)";
+            employeeTable.Rows[1].Range.Bold = 1;
+            employeeTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+
+            int k = 1;
+            foreach (var teacher in allTeachers)
+            {
+                cellRange = employeeTable.Cell(k + 1, 1).Range;
+                cellRange.Text = teacher.FullName;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 2).Range;
+                cellRange.Text = teacher.Pasport;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 3).Range;
+                cellRange.Text = teacher.DateOfBirth.ToString();
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 4).Range;
+                cellRange.Text = teacher.Gender;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 5).Range;
+                cellRange.Text = teacher.MaritalStatus;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 6).Range;
+                cellRange.Text = teacher.Education;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 7).Range;
+                cellRange.Text = teacher.Address_;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 8).Range;
+                cellRange.Text = teacher.HomeNumber;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                cellRange = employeeTable.Cell(k + 1, 9).Range;
+                cellRange.Text = teacher.Specialization_s;
+                cellRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                k++;
+            }
+            app.Visible = true;
+            document.SaveAs2(@"D:\Lab 3 Word\outputFile.docx");
+            document.SaveAs2(@"D:\Lab 3 Word\outputFile.pdf", Word.WdExportFormat.wdExportFormatPDF);
         }
     }
 }
